@@ -11,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $name = $_POST['name'] ?? '';
     $slug = $_POST['slug'] ?? '';
 
-    $sql = "INSERT INTO categories (name, slug) VALUES (:name, :slug)";
+    $sql = "INSERT INTO tags (name, slug) VALUES (:name, :slug)";
     $stmt = $pdo->prepare($sql);
     $stmt->bindValue(':name', $name, PDO::PARAM_STR);
     $stmt->bindValue(':slug', $slug, PDO::PARAM_STR);
@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $stmt->execute();
         redirect('index.php');
     } catch (PDOException $e) {
-        $error = 'このスラッグは既に使われています';
+        $error = 'このタグは既に使われています';
     }
 }
 ?>
@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <html lang="ja">
 
 <head>
-    <title>カテゴリ追加 | ブログ管理システム</title>
+    <title>タグ追加 | ブログ管理システム</title>
     <?php require_once '../_layout/head.php'; ?>
 </head>
 
@@ -37,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <?php require_once '../_layout/sidebar.php'; ?>
 
     <div class="container">
-        <h1 class="page-title">カテゴリ追加</h1>
+        <h1 class="page-title">タグ追加</h1>
         <?php if ($error): ?>
             <p style="color:red;"><?= h($error) ?></p>
         <?php endif; ?>
@@ -45,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <form method="post" action="./create.php" id="new-form">
                 <div class="form-group">
                     <label for="name" class="form-label">
-                        カテゴリ名
+                        タグ名
                         <input type="text" id="name" name="name" value="<?= h($name) ?>" class="form-input" required>
                     </label>
                 </div>

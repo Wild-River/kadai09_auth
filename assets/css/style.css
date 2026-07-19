@@ -188,7 +188,7 @@ body:has(.sidebar) {
   display: flex;
   flex-direction: column;
   background: var(--color-forest-900);
-  padding: 20px 0;
+  padding-top: 20px;
 }
 
 .sidebar__brand {
