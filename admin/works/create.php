@@ -97,7 +97,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <html lang="ja">
 
 <head>
-    <title>作品登録 | ブログ管理システム</title>
+    <title>制作アプリ登録 | ブログ管理システム</title>
     <?php require_once '../_layout/head.php'; ?>
 </head>
 
@@ -105,7 +105,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <?php require_once '../_layout/sidebar.php'; ?>
 
     <div class="container">
-        <h1 class="page-title">作品登録</h1>
+        <h1 class="page-title">制作アプリ登録</h1>
         <?php if ($error): ?>
             <p style="color:red;"><?= h($error) ?></p>
         <?php endif; ?>
@@ -135,50 +135,45 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>
 
                 <div class="form-group">
-                    <label for="images">
+                    <label for="images" class="form-label">
                         ギャラリー画像（複数選択可）
                         <input type="file" id="images" name="images[]" class="form-input" multiple>
                     </label>
                 </div>
 
 
-                <div class="form-group">
-                    <label for="category_id">
-                        カテゴリ名
-                        <select name="category_id" id="category_id" class="form-input">
-                            <?php foreach ($categories as $category): ?>
-                                <option value="<?= h($category["id"]) ?>" <?= $category['id'] == $category_id ? 'selected' : '' ?>><?= h($category["name"]) ?></option>
-                            <?php endforeach; ?>
-                        </select>
-                    </label>
+                <div class="form-group form-row">
+                    <label for="category_id" class="form-label">カテゴリ名</label>
+                    <select name="category_id" id="category_id" class="form-input form-input--narrow">
+                        <?php foreach ($categories as $category): ?>
+                            <option value="<?= h($category["id"]) ?>" <?= $category['id'] == $category_id ? 'selected' : '' ?>><?= h($category["name"]) ?></option>
+                        <?php endforeach; ?>
+                    </select>
                 </div>
 
-                <div class="form-group">
-                    タグ
-                    <?php foreach ($tags as $tag): ?>
-                        <label>
-                            <input type="checkbox" name="tags[]" value="<?= h($tag['id']) ?>"><?= h($tag['name']) ?>
-                        </label>
-                    <?php endforeach; ?>
+                <div class="form-group form-row">
+                    <span class="form-label">タグ</span>
+                    <div class="tag-list">
+                        <?php foreach ($tags as $tag): ?>
+                            <label>
+                                <input type="checkbox" name="tags[]" value="<?= h($tag['id']) ?>"><?= h($tag['name']) ?>
+                            </label>
+                        <?php endforeach; ?>
+                    </div>
                 </div>
 
-                <div class="form-group">
-                    <label for="slug" class="form-label">
-                        スラッグ
-                        <input type="text" id="slug" name="slug" value="<?= h($slug) ?>" class="form-input" required>
-                    </label>
+                <div class="form-group form-row">
+                    <label for="slug" class="form-label">スラッグ</label>
+                    <input type="text" id="slug" name="slug" value="<?= h($slug) ?>" class="form-input form-input--narrow" required>
                 </div>
 
-                <div class="form-group">
-                    <label for="status">
-                        ステータス
-                        <select name="status" id="status" class="form-input">
-                            <?php foreach ($statusLabels as $key => $label): ?>
-                                <option value="<?= h($key) ?>" <?= $key === $status ? 'selected' : '' ?>><?= h($label) ?></option>
-                            <?php endforeach; ?>
-                        </select>
-                    </label>
-
+                <div class="form-group form-row">
+                    <label for="status" class="form-label">ステータス</label>
+                    <select name="status" id="status" class="form-input form-input--narrow">
+                        <?php foreach ($statusLabels as $key => $label): ?>
+                            <option value="<?= h($key) ?>" <?= $key === $status ? 'selected' : '' ?>><?= h($label) ?></option>
+                        <?php endforeach; ?>
+                    </select>
                 </div>
             </form>
 

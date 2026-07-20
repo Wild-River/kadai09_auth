@@ -135,55 +135,48 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>
 
                 <div class="form-group">
-                    <label for="thumbnail">
+                    <label for="thumbnail" class="form-label">
                         サムネイル画像
-
-                        <input type="file" id="thumbnail" name="thumbnail" class="form-input">
-
                     </label>
                     <?php if (!empty($post['thumbnail_path'])): ?>
-                        <img src="/kadai09_auth/<?= h($post['thumbnail_path']) ?>" alt="現在のサムネイル" style="max-width: 200px;">
+                        <img src="/kadai09_auth/<?= h($post['thumbnail_path']) ?>" alt="現在のサムネイル" style="max-width: 380px;">
+                        <p class="form-hint">現在の画像です。変更する場合のみ新しい画像を選択してください（未選択の場合は現在の画像のまま更新されます）。</p>
                     <?php endif; ?>
-
-
+                    <input type="file" id="thumbnail" name="thumbnail" class="form-input">
                 </div>
 
-                <div class="form-group">
-                    <label for="category_id">
-                        カテゴリ名
-                        <select name="category_id" id="category_id" class="form-input">
-                            <?php foreach ($categories as $category): ?>
-                                <option value="<?= h($category["id"]) ?>" <?= $category['id'] == $post['category_id'] ? 'selected' : '' ?>><?= h($category["name"]) ?></option>
-                            <?php endforeach; ?>
-                        </select>
-                    </label>
+                <div class="form-group form-row">
+                    <label for="category_id" class="form-label">カテゴリ名</label>
+                    <select name="category_id" id="category_id" class="form-input form-input--narrow">
+                        <?php foreach ($categories as $category): ?>
+                            <option value="<?= h($category["id"]) ?>" <?= $category['id'] == $post['category_id'] ? 'selected' : '' ?>><?= h($category["name"]) ?></option>
+                        <?php endforeach; ?>
+                    </select>
                 </div>
 
-                <div class="form-group">
-                    タグ
-                    <?php foreach ($tags as $tag): ?>
-                        <label>
-                            <input type="checkbox" name="tags[]" value="<?= h($tag['id']) ?>" <?= in_array($tag['id'], $postTagIds) ? 'checked' : '' ?>><?= h($tag['name']) ?>
-                        </label>
-                    <?php endforeach; ?>
+                <div class="form-group form-row">
+                    <span class="form-label">タグ</span>
+                    <div class="tag-list">
+                        <?php foreach ($tags as $tag): ?>
+                            <label>
+                                <input type="checkbox" name="tags[]" value="<?= h($tag['id']) ?>" <?= in_array($tag['id'], $postTagIds) ? 'checked' : '' ?>><?= h($tag['name']) ?>
+                            </label>
+                        <?php endforeach; ?>
+                    </div>
                 </div>
 
-                <div class="form-group">
-                    <label for="slug" class="form-label">
-                        スラッグ
-                        <input type="text" id="slug" name="slug" value="<?= h($post['slug']) ?>" class="form-input" required>
-                    </label>
+                <div class="form-group form-row">
+                    <label for="slug" class="form-label">スラッグ</label>
+                    <input type="text" id="slug" name="slug" value="<?= h($post['slug']) ?>" class="form-input form-input--narrow" required>
                 </div>
 
-                <div class="form-group">
-                    <label for="status">
-                        ステータス
-                        <select name="status" id="status" class="form-input">
-                            <?php foreach ($statusLabels as $key => $label): ?>
-                                <option value="<?= h($key) ?>" <?= $key == $post['status'] ? 'selected' : '' ?>><?= h($label) ?></option>
-                            <?php endforeach; ?>
-                        </select>
-                    </label>
+                <div class="form-group form-row">
+                    <label for="status" class="form-label">ステータス</label>
+                    <select name="status" id="status" class="form-input form-input--narrow">
+                        <?php foreach ($statusLabels as $key => $label): ?>
+                            <option value="<?= h($key) ?>" <?= $key == $post['status'] ? 'selected' : '' ?>><?= h($label) ?></option>
+                        <?php endforeach; ?>
+                    </select>
 
                 </div>
 

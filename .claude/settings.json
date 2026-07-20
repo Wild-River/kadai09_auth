@@ -1,0 +1,7 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(php -l /Applications/MAMP/htdocs/kadai09_auth/public/works/single.php)"
+    ]
+  }
+}

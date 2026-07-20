@@ -5,7 +5,7 @@ require_once '../../includes/functions.php';
 
 $statusLabels = statusLabels();
 
-$sql = "SELECT posts.id, posts.title, posts.slug, posts.status, categories.name AS category_name FROM posts LEFT JOIN categories ON posts.category_id = categories.id";
+$sql = "SELECT posts.id, posts.title, posts.slug, posts.status, posts.thumbnail_path, posts.body, categories.name AS category_name FROM posts LEFT JOIN categories ON posts.category_id = categories.id";
 $stmt = $pdo->prepare($sql);
 $stmt->execute();
 $posts = $stmt->fetchAll();
@@ -32,8 +32,10 @@ $posts = $stmt->fetchAll();
             <table>
                 <thead>
                     <tr>
+                        <th>サムネイル</th>
                         <th>ID</th>
                         <th>タイトル</th>
+                        <th>本文</th>
                         <th>スラッグ</th>
                         <th>ステータス</th>
                         <th>カテゴリ名</th>
@@ -42,8 +44,14 @@ $posts = $stmt->fetchAll();
                 <tbody>
                     <?php foreach ($posts as $post): ?>
                         <tr class="row-link" data-href="edit.php?id=<?= h($post['id']) ?>">
+                            <td>
+                                <?php if (!empty($post['thumbnail_path'])): ?>
+                                    <img class="table-thumb" src="/kadai09_auth/<?= h($post['thumbnail_path']) ?>" alt="">
+                                <?php endif; ?>
+                            </td>
                             <td><?= h($post['id']) ?></td>
                             <td><?= h($post['title']) ?></td>
+                            <td class="table-excerpt"><?= h(mb_substr($post['body'], 0, 20)) ?><?= mb_strlen($post['body']) > 20 ? '…' : '' ?></td>
                             <td><?= h($post['slug']) ?></td>
                             <td><?= h($statusLabels[$post['status']]) ?></td>
                             <td><?= h($post['category_name']) ?></td>

@@ -31,7 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <?php require_once '_layout/head.php'; ?>
 </head>
 
-<body>
+<body class="login-page">
     <h1>ログイン</h1>
     <?php if ($error): ?>
         <p style="color:red;"><?= h($error) ?></p>

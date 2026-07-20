@@ -159,7 +159,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <html lang="ja">
 
 <head>
-    <title>作品編集 | ブログ管理システム</title>
+    <title>制作アプリ編集 | ブログ管理システム</title>
     <?php require_once '../_layout/head.php'; ?>
 </head>
 
@@ -167,7 +167,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <?php require_once '../_layout/sidebar.php'; ?>
 
     <div class="container">
-        <h1 class="page-title">作品編集</h1>
+        <h1 class="page-title">制作アプリ編集</h1>
         <?php if ($error): ?>
             <p style="color:red;"><?= h($error) ?></p>
         <?php endif; ?>
@@ -190,17 +190,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>
 
                 <div class="form-group">
-                    <label for="thumbnail">
+                    <label for="thumbnail" class="form-label">
                         サムネイル画像
-                        <input type="file" id="thumbnail" name="thumbnail" class="form-input">
                     </label>
                     <?php if (!empty($work['thumbnail_path'])): ?>
-                        <img src="/kadai09_auth/<?= h($work['thumbnail_path']) ?>" alt="現在のサムネイル" style="max-width: 200px;">
+                        <img src="/kadai09_auth/<?= h($work['thumbnail_path']) ?>" alt="現在のサムネイル" style="max-width: 380px;">
+                        <p class="form-hint">現在の画像です。変更する場合のみ新しい画像を選択してください（未選択の場合は現在の画像のまま更新されます）。</p>
                     <?php endif; ?>
+                    <input type="file" id="thumbnail" name="thumbnail" class="form-input">
                 </div>
 
                 <div class="form-group">
-                    ギャラリー画像
+                    <span class="form-label">ギャラリー画像</span>
                     <?php foreach ($workImages as $image): ?>
                         <div>
                             <img src="/kadai09_auth/<?= h($image['file_path']) ?>" style="max-width:150px;">
@@ -211,47 +212,42 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         </div>
                     <?php endforeach; ?>
 
-                    <label for="images">画像を追加</label>
+                    <label for="images" class="form-label">画像を追加</label>
                     <input type="file" id="images" name="images[]" class="form-input" multiple>
                 </div>
 
-                <div class="form-group">
-                    <label for="category_id">
-                        カテゴリ名
-                        <select name="category_id" id="category_id" class="form-input">
-                            <?php foreach ($categories as $category): ?>
-                                <option value="<?= h($category["id"]) ?>" <?= $category['id'] == $work['category_id'] ? 'selected' : '' ?>><?= h($category["name"]) ?></option>
-                            <?php endforeach; ?>
-                        </select>
-                    </label>
+                <div class="form-group form-row">
+                    <label for="category_id" class="form-label">カテゴリ名</label>
+                    <select name="category_id" id="category_id" class="form-input form-input--narrow">
+                        <?php foreach ($categories as $category): ?>
+                            <option value="<?= h($category["id"]) ?>" <?= $category['id'] == $work['category_id'] ? 'selected' : '' ?>><?= h($category["name"]) ?></option>
+                        <?php endforeach; ?>
+                    </select>
                 </div>
 
-                <div class="form-group">
-                    タグ
-                    <?php foreach ($tags as $tag): ?>
-                        <label>
-                            <input type="checkbox" name="tags[]" value="<?= h($tag['id']) ?>" <?= in_array($tag['id'], $workTagIds) ? 'checked' : '' ?>><?= h($tag['name']) ?>
-                        </label>
-                    <?php endforeach; ?>
+                <div class="form-group form-row">
+                    <span class="form-label">タグ</span>
+                    <div class="tag-list">
+                        <?php foreach ($tags as $tag): ?>
+                            <label>
+                                <input type="checkbox" name="tags[]" value="<?= h($tag['id']) ?>" <?= in_array($tag['id'], $workTagIds) ? 'checked' : '' ?>><?= h($tag['name']) ?>
+                            </label>
+                        <?php endforeach; ?>
+                    </div>
                 </div>
 
-                <div class="form-group">
-                    <label for="slug" class="form-label">
-                        スラッグ
-                        <input type="text" id="slug" name="slug" value="<?= h($work['slug']) ?>" class="form-input" required>
-                    </label>
+                <div class="form-group form-row">
+                    <label for="slug" class="form-label">スラッグ</label>
+                    <input type="text" id="slug" name="slug" value="<?= h($work['slug']) ?>" class="form-input form-input--narrow" required>
                 </div>
 
-                <div class="form-group">
-                    <label for="status">
-                        ステータス
-                        <select name="status" id="status" class="form-input">
-                            <?php foreach ($statusLabels as $key => $label): ?>
-                                <option value="<?= h($key) ?>" <?= $key == $work['status'] ? 'selected' : '' ?>><?= h($label) ?></option>
-                            <?php endforeach; ?>
-                        </select>
-                    </label>
-
+                <div class="form-group form-row">
+                    <label for="status" class="form-label">ステータス</label>
+                    <select name="status" id="status" class="form-input form-input--narrow">
+                        <?php foreach ($statusLabels as $key => $label): ?>
+                            <option value="<?= h($key) ?>" <?= $key == $work['status'] ? 'selected' : '' ?>><?= h($label) ?></option>
+                        <?php endforeach; ?>
+                    </select>
                 </div>
 
                 <input type="hidden" name="id" value="<?= h($work['id']) ?>">
