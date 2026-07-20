@@ -261,7 +261,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <input type="hidden" name="id" value="<?= h($work['id']) ?>">
                     <button type="submit" class="delete-btn">削除</button>
                 </form>
-
+                <?php if ($work['status'] === 'published'): ?>
+                    <a href="/kadai09_auth/public/works/single.php?id=<?= h($work['id']) ?>" class="back-btn" target="_blank" rel="noopener noreferrer">ページを見る</a>
+                <?php endif; ?>
                 <a href="index.php" class="back-btn">戻る</a>
             </div>
         </div>

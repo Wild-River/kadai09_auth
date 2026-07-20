@@ -104,7 +104,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <html lang="ja">
 
 <head>
-    <title>ブログ編集 | ブログ管理システム</title>
+    <title>記事編集 | ブログ管理システム</title>
     <?php require_once '../_layout/head.php'; ?>
 </head>
 
@@ -112,7 +112,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <?php require_once '../_layout/sidebar.php'; ?>
 
     <div class="container">
-        <h1 class="page-title">ブログ編集</h1>
+        <h1 class="page-title">記事編集</h1>
         <?php if ($error): ?>
             <p style="color:red;"><?= h($error) ?></p>
         <?php endif; ?>
@@ -191,7 +191,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     <input type="hidden" name="id" value="<?= h($post['id']) ?>">
                     <button type="submit" class="delete-btn">削除</button>
                 </form>
-
+                <?php if ($post['status'] === 'published'): ?>
+                    <a href="/kadai09_auth/public/posts/single.php?id=<?= h($post['id']) ?>" class="back-btn" target="_blank" rel="noopener noreferrer">ページを見る</a>
+                <?php endif; ?>
                 <a href="index.php" class="back-btn">戻る</a>
             </div>
         </div>

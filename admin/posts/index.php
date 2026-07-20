@@ -15,7 +15,7 @@ $posts = $stmt->fetchAll();
 <html lang="ja">
 
 <head>
-    <title>ブログ一覧 | ブログ管理システム</title>
+    <title>記事一覧 | ブログ管理システム</title>
     <?php require_once '../_layout/head.php'; ?>
 </head>
 
@@ -24,7 +24,7 @@ $posts = $stmt->fetchAll();
 
     <div class="container">
         <div class="page-head">
-            <h1>ブログ一覧</h1>
+            <h1>記事一覧</h1>
             <a href="create.php" class="btn-primary">+ 新規登録</a>
         </div>
 

@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
 <html lang="ja">
 
 <head>
-    <title>ブログ詳細 | Rumi Arakawa -portfolio site-</title>
+    <title>記事詳細 | Rumi Arakawa -portfolio site-</title>
     <?php require_once '../../admin/_layout/head.php'; ?>
 </head>
 
@@ -43,11 +43,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     <div class="container">
 
         <?php if (!$post): ?>
-            <p>ブログが見つかりませんでした</p>
+            <p>記事が見つかりませんでした</p>
             <?php exit(); ?>
         <?php endif; ?>
 
-        <p class="breadcrumb"><a href="/kadai09_auth/public/index.php">TOP</a> / <a href="index.php">ブログ一覧</a> / <?= h($post['title']) ?></p>
+        <p class="breadcrumb"><a href="/kadai09_auth/public/index.php">TOP</a> / <a href="index.php">記事一覧</a> / <?= h($post['title']) ?></p>
 
         <article class="article">
             <header class="article-header">

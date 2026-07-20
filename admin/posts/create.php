@@ -74,7 +74,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <html lang="ja">
 
 <head>
-    <title>ブログ作成 | ブログ管理システム</title>
+    <title>記事作成 | ブログ管理システム</title>
     <?php require_once '../_layout/head.php'; ?>
 </head>
 
@@ -82,7 +82,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <?php require_once '../_layout/sidebar.php'; ?>
 
     <div class="container">
-        <h1 class="page-title">ブログ作成</h1>
+        <h1 class="page-title">記事作成</h1>
         <?php if ($error): ?>
             <p style="color:red;"><?= h($error) ?></p>
         <?php endif; ?>

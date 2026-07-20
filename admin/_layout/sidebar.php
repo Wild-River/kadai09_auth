@@ -29,10 +29,15 @@ function isSidebarLinkActive(string $href, string $currentPage, array $map): boo
     <div class="sidebar__brand">
         <a href="/kadai09_auth/admin/dashboard.php">ブログ管理システム</a>
     </div>
+    <a href="/kadai09_auth/public/index.php" class="sidebar__link" target="_blank" rel="noopener noreferrer" title="サイトを表示" aria-label="サイトを表示">
+        <i class="fa-solid fa-arrow-up-right-from-square"></i>
+        <span>サイトを表示</span>
+    </a>
+
     <nav class="sidebar__nav" id="sidebar-nav">
         <div class="sidebar__group">
             <a href="/kadai09_auth/admin/works/index.php" class="sidebar__link<?= isSidebarLinkActive('/kadai09_auth/admin/works/index.php', $currentPage, $sidebarActiveLinks) ? ' is-active' : '' ?>">
-                <i class="fa-solid fa-images"></i>
+                <i class="fa-solid fa-briefcase"></i>
                 <span>制作アプリ管理</span>
             </a>
             <a href="/kadai09_auth/admin/works/create.php" class="sidebar__link sidebar__link--sub<?= isSidebarLinkActive('/kadai09_auth/admin/works/create.php', $currentPage, $sidebarActiveLinks) ? ' is-active' : '' ?>">
@@ -43,16 +48,16 @@ function isSidebarLinkActive(string $href, string $currentPage, array $map): boo
         <div class="sidebar__group">
             <a href="/kadai09_auth/admin/posts/index.php" class="sidebar__link<?= isSidebarLinkActive('/kadai09_auth/admin/posts/index.php', $currentPage, $sidebarActiveLinks) ? ' is-active' : '' ?>">
                 <i class="fa-solid fa-newspaper"></i>
-                <span>ブログ管理</span>
+                <span>記事管理</span>
             </a>
             <a href="/kadai09_auth/admin/posts/create.php" class="sidebar__link sidebar__link--sub<?= isSidebarLinkActive('/kadai09_auth/admin/posts/create.php', $currentPage, $sidebarActiveLinks) ? ' is-active' : '' ?>">
                 <i class="fa-solid fa-plus"></i>
-                <span>ブログ登録</span>
+                <span>記事登録</span>
             </a>
         </div>
         <div class="sidebar__group">
             <a href="/kadai09_auth/admin/categories/index.php" class="sidebar__link<?= isSidebarLinkActive('/kadai09_auth/admin/categories/index.php', $currentPage, $sidebarActiveLinks) ? ' is-active' : '' ?>">
-                <i class="fa-solid fa-layer-group"></i>
+                <i class="fa-solid fa-folder"></i>
                 <span>カテゴリ管理</span>
             </a>
             <a href="/kadai09_auth/admin/categories/create.php" class="sidebar__link sidebar__link--sub<?= isSidebarLinkActive('/kadai09_auth/admin/categories/create.php', $currentPage, $sidebarActiveLinks) ? ' is-active' : '' ?>">
@@ -62,7 +67,7 @@ function isSidebarLinkActive(string $href, string $currentPage, array $map): boo
         </div>
         <div class="sidebar__group">
             <a href="/kadai09_auth/admin/tags/index.php" class="sidebar__link<?= isSidebarLinkActive('/kadai09_auth/admin/tags/index.php', $currentPage, $sidebarActiveLinks) ? ' is-active' : '' ?>">
-                <i class="fa-solid fa-tags"></i>
+                <i class="fa-solid fa-tag"></i>
                 <span>タグ管理</span>
             </a>
             <a href="/kadai09_auth/admin/tags/create.php" class="sidebar__link sidebar__link--sub<?= isSidebarLinkActive('/kadai09_auth/admin/tags/create.php', $currentPage, $sidebarActiveLinks) ? ' is-active' : '' ?>">
@@ -73,11 +78,13 @@ function isSidebarLinkActive(string $href, string $currentPage, array $map): boo
 
     </nav>
     <div class="sidebar__footer">
+
         <a href="/kadai09_auth/admin/logout.php" class="sidebar__link" title="ログアウト" aria-label="ログアウト">
             <i class="fa-solid fa-right-from-bracket"></i>
             <span>ログアウト</span>
         </a>
     </div>
+
 </aside>
 <div class="sidebar-overlay"></div>
 <script src="/kadai09_auth/assets/js/script.js"></script>

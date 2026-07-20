@@ -19,7 +19,7 @@ $posts = $stmt->fetchAll();
 <html lang="ja">
 
 <head>
-    <title>ブログ一覧 | Rumi Arakawa -portfolio site-</title>
+    <title>記事一覧 | Rumi Arakawa -portfolio site-</title>
     <?php require_once '../../admin/_layout/head.php'; ?>
 </head>
 
@@ -31,7 +31,7 @@ $posts = $stmt->fetchAll();
     </div>
 
     <div class="container">
-        <p class="breadcrumb"><a href="/kadai09_auth/public/index.php">TOP</a> / ブログ一覧</p>
+        <p class="breadcrumb"><a href="/kadai09_auth/public/index.php">TOP</a> / 記事一覧</p>
 
         <div class="blog-list">
             <?php foreach ($posts as $post): ?>
