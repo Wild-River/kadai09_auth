@@ -1,6 +1,10 @@
 <?php
 require_once '../config/db.php';
 require_once '../includes/functions.php';
+require_once '../includes/github_api.php';
+require_once '../config/env.php';
+
+$githubTotals = get_cached_github_languages($pdo, 'Wild-River', getenv('GITHUB_TOKEN'));
 
 $sql = "SELECT works.id, works.title, works.slug, works.thumbnail_path, categories.name AS category_name
 FROM works
@@ -69,6 +73,46 @@ $posts = $stmt->fetchAll();
         <div class="section-more">
             <a class="btn-primary" href="works/index.php">制作アプリ一覧を見る</a>
         </div>
+
+        <div class="github-langs-section">
+            <h2>GitHubリポジトリでの使用言語</h2>
+            <?php if (!empty($githubTotals)): ?>
+                <?php
+                $grandTotal = array_sum($githubTotals);
+                $topLangs = array_slice($githubTotals, 0, 6, true);
+                $otherBytes = $grandTotal - array_sum($topLangs);
+                if ($otherBytes > 0) {
+                    $topLangs['その他'] = $otherBytes;
+                }
+
+                $colors = ['#67b5b0', '#549691', '#8a9a95', '#c9c2a8', '#b4d9d6', '#3d5c58', '#d9d4c2'];
+                ?>
+                <div class="github-langs">
+                    <div class="github-langs__bar">
+                        <?php foreach ($topLangs as $i => $bytes): ?>
+                            <?php $percent = $bytes / $grandTotal * 100; ?>
+                            <span class="github-langs__segment"
+                                style="width: <?= h($percent) ?>%; background: <?= h($colors[array_search($i, array_keys($topLangs)) % count($colors)]) ?>;"></span>
+                        <?php endforeach; ?>
+                    </div>
+
+                    <ul class="github-langs__list">
+                        <?php foreach ($topLangs as $lang => $bytes): ?>
+                            <?php
+                            $percent = round($bytes / $grandTotal * 100, 1);
+                            $colorIndex = array_search($lang, array_keys($topLangs));
+                            ?>
+                            <li class="github-langs__item">
+                                <span class="github-langs__swatch" style="background: <?= h($colors[$colorIndex % count($colors)]) ?>;"></span>
+                                <span class="github-langs__name"><?= h($lang) ?></span>
+                                <span class="github-langs__percent"><?= h($percent) ?>%</span>
+                            </li>
+                        <?php endforeach; ?>
+                    </ul>
+                </div>
+            <?php endif; ?>
+        </div>
+
     </div>
 
     <?php require_once '_layout/footer.php'; ?>
