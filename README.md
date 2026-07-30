@@ -11,7 +11,7 @@
 - 同じテーブルから管理画面側と公開ページ側それぞれを出し分け、公開ページ側ではstatus = publishedのものだけを表示させるようにしました。
 - GitHub REST APIと連携し、自分のリポジトリ群の使用言語比率を公開ページのトップに表示する機能を追加しました。
 
-![screenShot](db_v2.webp)
+![screenShot](db_v3.webp)
 
 ## ③アプリのデプロイURL
 

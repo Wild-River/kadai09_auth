@@ -78,7 +78,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
 
             foreach ($selectedTagIds as $selectedTagId) {
-                $sql = "INSERT INTO work_tags (work_id, tag_id) VALUES (:work_id, :tag_id)";
+                $sql = "INSERT INTO tag_work (work_id, tag_id) VALUES (:work_id, :tag_id)";
                 $stmt = $pdo->prepare($sql);
                 $stmt->bindValue(':work_id', $work_id, PDO::PARAM_INT);
                 $stmt->bindValue(':tag_id', $selectedTagId, PDO::PARAM_INT);

@@ -5,8 +5,8 @@ require_once '../../includes/functions.php';
 $sql = "SELECT works.id, works.title, works.slug, works.status, works.thumbnail_path, works.created_at, categories.name AS category_name, GROUP_CONCAT(tags.name SEPARATOR ',') AS tag_names
 FROM works
 LEFT JOIN categories ON works.category_id = categories.id
-LEFT JOIN work_tags ON work_tags.work_id = works.id
-LEFT JOIN tags ON tags.id = work_tags.tag_id
+LEFT JOIN tag_work ON tag_work.work_id = works.id
+LEFT JOIN tags ON tags.id = tag_work.tag_id
 WHERE works.status = 'published'
 GROUP BY works.id
 ORDER BY works.created_at DESC";

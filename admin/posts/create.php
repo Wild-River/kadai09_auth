@@ -55,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $post_id = $pdo->lastInsertId(); //今INSERTしたばかりの行のIDを取得
 
             foreach ($selectedTagIds as $selectedTagId) {
-                $sql = "INSERT INTO post_tags (post_id, tag_id) VALUES (:post_id, :tag_id)";
+                $sql = "INSERT INTO post_tag (post_id, tag_id) VALUES (:post_id, :tag_id)";
                 $stmt = $pdo->prepare($sql);
                 $stmt->bindValue(':post_id', $post_id, PDO::PARAM_INT);
                 $stmt->bindValue(':tag_id', $selectedTagId, PDO::PARAM_INT);

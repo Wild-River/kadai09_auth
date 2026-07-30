@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $stmt->execute();
     $work = $stmt->fetch();
 
-    $sql = "SELECT tag_id FROM work_tags WHERE work_id = :id";
+    $sql = "SELECT tag_id FROM tag_work WHERE work_id = :id";
     $stmt = $pdo->prepare($sql);
     $stmt->bindValue(':id', $id, PDO::PARAM_INT);
     $stmt->execute();
@@ -85,13 +85,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
         }
 
-        $deleteSql = "DELETE FROM work_tags WHERE work_id = :work_id";
+        $deleteSql = "DELETE FROM tag_work WHERE work_id = :work_id";
         $deleteStmt = $pdo->prepare($deleteSql);
         $deleteStmt->bindValue(':work_id', $id, PDO::PARAM_INT);
         $deleteStmt->execute();
 
         foreach ($selectedTagIds as $selectedTagId) {
-            $sql = "INSERT INTO work_tags (work_id, tag_id) VALUES (:work_id, :tag_id)";
+            $sql = "INSERT INTO tag_work (work_id, tag_id) VALUES (:work_id, :tag_id)";
             $stmt = $pdo->prepare($sql);
             $stmt->bindValue(':work_id', $id, PDO::PARAM_INT);
             $stmt->bindValue(':tag_id', $selectedTagId, PDO::PARAM_INT);

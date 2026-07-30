@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     $stmt->execute();
     $work = $stmt->fetch();
 
-    $sql = "SELECT tags.name FROM work_tags JOIN tags ON work_tags.tag_id = tags.id WHERE work_tags.work_id = :id";
+    $sql = "SELECT tags.name FROM tag_work JOIN tags ON tag_work.tag_id = tags.id WHERE tag_work.work_id = :id";
     $stmt = $pdo->prepare($sql);
     $stmt->bindValue(':id', $id, PDO::PARAM_INT);
     $stmt->execute();

@@ -52,7 +52,7 @@ CREATE TABLE work_images (
     FOREIGN KEY (work_id) REFERENCES works(id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE work_tags (
+CREATE TABLE tag_work (
     work_id INT NOT NULL,
     tag_id INT NOT NULL,
     PRIMARY KEY (work_id, tag_id),
@@ -60,7 +60,7 @@ CREATE TABLE work_tags (
     FOREIGN KEY (tag_id) REFERENCES tags(id) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
-CREATE TABLE post_tags (
+CREATE TABLE post_tag (
     post_id INT NOT NULL,
     tag_id INT NOT NULL,
     PRIMARY KEY (post_id, tag_id),
